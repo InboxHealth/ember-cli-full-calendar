@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-full-calendar",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "An Ember wrapper for jQuery FullCalendar.",
   "directories": {
     "doc": "doc",
@@ -16,10 +16,12 @@
     "node": ">= 0.10.0"
   },
   "author": "Icicle Technologies <tech@icicletech.com>",
-  "contributors": [{
-    "name": "Shrivara K S",
-    "email": "shrivara.ks@icicletech.com"
-  }],
+  "contributors": [
+    {
+      "name": "Shrivara K S",
+      "email": "shrivara.ks@icicletech.com"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
