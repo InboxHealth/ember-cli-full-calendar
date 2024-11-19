@@ -1,60 +1,61 @@
-import Ember from 'ember';
+import Component from '@glimmer/component';
 
-export default Ember.Component.extend({
-  tagName: 'div',
-  classNames: ['full-calendar'],
+export default class FullCalendar extends Component {
+  tagName = 'div';
+  classNames = ['full-calendar'];
 
-  // Event Data
-  events                : null,
+  // Event data
+  events = null;
 
-  // General Display
-  headerLeft            : { left: 'title', center: '', right:  'today prev,next' },
-  theme                 : false,
-  firstDay              : 0,
-  isRTL                 : false,
-  weekends              : true,
-  hiddenDays            : [],
-  fixedWeekCount        : true,
-  weekNumbers           : false,
-  height                : 'auto',
-  businessHours         : false,
-  nowIndicator          : false,
-  allDaySlot            : true,
-  eventLimit            : false,
-  eventLimitClick       : 'popover',
+  //  General display
+  headerLeft = { left: 'title', center: '', right: 'today prev,next' };
+  theme = false;
+  firstDay = 0;
+  isRTL = false;
+  weekends = true;
+  hiddenDays = [];
+  fixedWeekCount = true;
+  weekNumbers = false;
+  height = 'auto';
+  businessHours = false;
+  nowIndicator = false;
+  allDaySlot = true;
+  eventLimit = false;
+  eventLimitClick = 'popover';
 
   // Views
-  defaultView           : 'month',
+  defaultView = 'month';
 
-  // Agenda Options
-  minTime               : '00:00:00',
-  maxTime               : '24:00:00',
-  scrollTime            : '06:00:00',
-  slotEventOverlap      : true,
+  // Agenda options
+  minTime = '00:00:00';
+  maxTime = '24:00:00';
+  scrollTime = '06:00:00';
+  slotEventOverlap = true;
 
-  // Event Dragging & Resizing
-  editable              : false,
-  eventStartEditable    : false,
-  eventDurationEditable : false,
-  dragRevertDuration    : 500,
-  dragOpacity           : 0.75,
-  dragScroll            : true,
-  dragOverlap           : true,
+  // Event dragging and resizing
+  editable = false;
+  eventStartEditable = false;
+  eventDurationEditable = false;
+  dragRevertDuration = 500;
+  dragOpacity = 0.75;
+  dragScroll = true;
+  dragOverlap = true;
 
   // Selecting
-  selectable            : false,
+  selectable = false;
 
-  updateEvents: function() {
-    var fullCalendarComponent = Ember.$(".full-calendar");
+  updateEvents = function () {
+    const fullCalendarComponent = Ember.$('.full-calendar');
+
     fullCalendarComponent.fullCalendar('removeEvents');
     fullCalendarComponent.fullCalendar('addEventSource', this.get('events'));
-    fullCalendarComponent.fullCalendar('rerenderEvents' );
-  }.observes('events'),
+    fullCalendarComponent.fullCalendar('rerenderEvents');
+  }.observes('events');
 
-  _initializeCalendar: function() {
-    var _this = this;
-    return Ember.$(".full-calendar").fullCalendar({
+  _initializeCalendar = function () {
+    const _this = this;
 
+    return Ember.$('.full-calendar').fullCalendar({
       // Event Data
       events: _this.get('events'),
       timeFormat: _this.get('timeFormat'),
@@ -89,48 +90,48 @@ export default Ember.Component.extend({
       slotLabelFormat: _this.get('slotLabelFormat'),
 
       // Clicking & Hovering
-      dayClick: function(date, jsEvent, view) {
+      dayClick: function (date, jsEvent, view) {
         _this.sendAction('dayClick', date, jsEvent, view);
       },
-      
-      eventClick: function(calEvent, jsEvent, view) {
+
+      eventClick: function (calEvent, jsEvent, view) {
         _this.sendAction('eventClick', calEvent, jsEvent, view);
       },
 
-      eventDragStart: function(event, jsEvent, ui, view) {
+      eventDragStart: function (event, jsEvent, ui, view) {
         _this.sendAction('eventDragStart', event, jsEvent, ui, view);
       },
 
-      eventDragStop: function(event, jsEvent, ui, view) {
+      eventDragStop: function (event, jsEvent, ui, view) {
         _this.sendAction('eventDragStop', event, jsEvent, ui, view);
       },
 
-      eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
+      eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
         _this.sendAction('eventDrop', event, delta, revertFunc, jsEvent, ui, view);
       },
 
-      eventResize: function(event, delta, revertFunc, jsEvent, ui, view) {
+      eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
         _this.sendAction('eventResize', event, delta, revertFunc, jsEvent, ui, view);
       },
 
-      eventResizeStart: function(event, jsEvent, ui, view) {
+      eventResizeStart: function (event, jsEvent, ui, view) {
         _this.sendAction('eventResizeStart', event, jsEvent, ui, view);
       },
 
-      eventResizeStop: function(event, jsEvent, ui, view) {
+      eventResizeStop: function (event, jsEvent, ui, view) {
         _this.sendAction('eventResizeStop', event, jsEvent, ui, view);
       },
 
-      select: function(start, end, jsEvent, view) {
+      select: function (start, end, jsEvent, view) {
         _this.sendAction('select', start, end, jsEvent, view);
       },
 
       // Event Rendering
-      eventRender: function(event, element, view) {
+      eventRender: function (event, element, view) {
         _this.sendAction('eventRender', event, element, view);
       },
 
-      eventAfterRender: function( event, element, view ) {
+      eventAfterRender: function (event, element, view) {
         _this.sendAction('eventAfterRender', event, element, view);
       },
 
@@ -151,7 +152,7 @@ export default Ember.Component.extend({
       dragScroll: _this.get('dragScroll'),
 
       // Selecting
-      selectable: _this.get('selectable')
+      selectable: _this.get('selectable'),
     });
-  }.on('didInsertElement')
-});
+  }.on('didInsertElement');
+}

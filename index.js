@@ -1,13 +1,11 @@
-/* jshint node: true */
-"use strict";
+'use strict';
 
 module.exports = {
-  name: "ember-cli-full-calendar",
-
+  name: require('./package').name,
   included: function (app) {
     this._super.included(app);
 
-    app.import("node_modules/fullcalendar/dist/fullcalendar.min.js");
-    app.import("node_modules/fullcalendar/dist/fullcalendar.min.css");
+    app.import('node_modules/fullcalendar/dist/fullcalendar.min.js');
+    app.import('node_modules/fullcalendar/dist/fullcalendar.min.css');
   },
 };
