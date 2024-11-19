@@ -45,17 +45,18 @@ export default class FullCalendar extends Component {
   selectable = false;
 
   updateEvents = function () {
-    const fullCalendarComponent = Ember.$('.full-calendar');
+    const fullCalendarComponent = document.querySelector('.full-calendar');
 
     fullCalendarComponent.fullCalendar('removeEvents');
-    fullCalendarComponent.fullCalendar('addEventSource', this.get('events'));
+    fullCalendarComponent.fullCalendar('addEventSource', this.events);
     fullCalendarComponent.fullCalendar('rerenderEvents');
-  }.observes('events');
+  };
 
-  _initializeCalendar = function () {
+  _initializeCalendar() {
     const _this = this;
+    const fullCalendarComponent = document.querySelector('.full-calendar');
 
-    return Ember.$('.full-calendar').fullCalendar({
+    return fullCalendarComponent.fullCalendar({
       // Event Data
       events: _this.get('events'),
       timeFormat: _this.get('timeFormat'),
@@ -154,5 +155,10 @@ export default class FullCalendar extends Component {
       // Selecting
       selectable: _this.get('selectable'),
     });
-  }.on('didInsertElement');
+  }
+
+  constructor() {
+    super(...arguments);
+    this._initializeCalendar();
+  }
 }
